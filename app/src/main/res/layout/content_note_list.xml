@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/note_drawer_layout"
+    android:background="#E0E0E0"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.chokus.konye.privatememo.NoteListActivity"
+    tools:showIn="@layout/activity_note_list">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/header_layout">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/top_menu_icon"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/locked"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="1.8dp"
+                android:background="#757575"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/note_listView"
+            android:layout_below="@+id/header_layout"
+            android:choiceMode="singleChoice"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#E0E0E0"
+        android:id="@+id/note_relative_drawer_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_info_layout">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/user_img"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                android:layout_below="@+id/user_img"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/user_name_textView"
+                android:text="Susan"
+                android:textColor="#757575"
+                android:layout_marginTop="40dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View profile"
+                android:layout_centerHorizontal="true"
+                android:textColor="#757575"
+                android:layout_below="@+id/user_name_textView"
+                android:id="@+id/view_profile_textView"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_note_side_layout"
+            android:layout_below="@+id/user_info_layout">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/new_note_icon"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New note"
+                android:textColor="#757575"
+                android:layout_toEndOf="@+id/new_note_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/new_note_icon"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/encrypt_side_layout"
+            android:layout_below="@+id/new_note_side_layout">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/encrypt_icon"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Encrypt Note"
+                android:textColor="#757575"
+                android:layout_toEndOf="@+id/encrypt_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/encrypt_icon"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cloud_save_side_layout"
+            android:layout_below="@+id/encrypt_side_layout">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/cloud_save_icon"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save to Cloud"
+                android:textColor="#757575"
+                android:layout_toEndOf="@+id/cloud_save_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/cloud_save_icon"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/logout_side_layout"
+            android:layout_below="@+id/cloud_save_side_layout">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:id="@+id/logout_icon"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textColor="#757575"
+                android:layout_toEndOf="@+id/logout_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/logout_icon"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>

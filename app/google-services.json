@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "342191620026",
+    "firebase_url": "https://privatememo-79929.firebaseio.com",
+    "project_id": "privatememo-79929",
+    "storage_bucket": "privatememo-79929.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342191620026:android:9ffe0b7017f86a69",
+        "android_client_info": {
+          "package_name": "com.chokus.konye.privatememo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342191620026-afu2mfe9ufk8osoogaql8hfbe5mrd229.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chokus.konye.privatememo",
+            "certificate_hash": "94eea9112b978909e4d5029ba0e2a2140d14f6f1"
+          }
+        },
+        {
+          "client_id": "342191620026-1lbflpc60or3q8resndhu1q8jpra6har.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwmS0UhlkXpwdY5Xm2majLBOH3QiAiYdU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342191620026-1lbflpc60or3q8resndhu1q8jpra6har.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
