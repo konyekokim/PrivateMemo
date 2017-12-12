@@ -17,12 +17,13 @@ import io.realm.*
 
 import java.util.ArrayList
 import java.util.Collections
+import javax.inject.Inject
+import kotlin.properties.Delegates
 
 class NoteListActivity : AppCompatActivity() {
-    private val realm by lazy {Realm.getDefaultInstance()}
-    private var noteListView: ListView? = null
+    private var noteListView: ListView by Delegates.notNull()
     private var noteAdapter: NoteAdapter? = null
-    private var noteClassArrayList: ArrayList<NoteClass>? = null
+    private var noteClassList: List<NoteClass> by Delegates.notNull()
     private var noteDrawerLayout: DrawerLayout? = null
     private var newNoteLayout: RelativeLayout? = null
     private var encryptLayout: RelativeLayout? = null
@@ -30,8 +31,7 @@ class NoteListActivity : AppCompatActivity() {
     private var logoutLayout: RelativeLayout? = null
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
-    private var realmChangeListener: RealmChangeListener<Realm>? = null
-
+    @Inject lateinit var noteRealmManager : NoteRealmManager
     companion object {
         const val NOTE_TITLE = "com.chokus.konye.privatememo NoteTitle"
         const val NOTE_CONTENT = "com.chokus.konye.privatememo NoteContent"
@@ -41,28 +41,20 @@ class NoteListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_list)
-        Realm.init(this)
-        val config = RealmConfiguration.Builder().name("notes.realm").build()
-        Realm.setDefaultConfiguration(config)
         setFullScreen()
+        noteRealmManager = NoteRealmManager()
+        noteClassList = noteRealmManager.findAll()
         viewActions()
-        realmChangeListener = RealmChangeListener {
-            noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, retrieveFromDb())
-            noteListView!!.adapter = noteAdapter
-        }
         scrollMyListViewToBottom()
         sideMenuWidgets()
     }
 
     private fun viewActions() {
         noteListView = findViewById<View>(R.id.note_listView) as ListView
-        noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, retrieveFromDb())
-        noteListView!!.adapter = noteAdapter
-        noteListView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
+        noteListView.adapter = noteAdapter
+        noteListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(applicationContext, NoteActivity::class.java)
-            intent.putExtra(NOTE_TITLE, retrieveFromDb()[position].noteTitle)
-            intent.putExtra(NOTE_CONTENT, retrieveFromDb()[position].noteContent)
-            intent.putExtra(DATE_CREATED, retrieveFromDb()[position].dateCreated)
             startActivity(intent)
         }
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
@@ -72,21 +64,6 @@ class NoteListActivity : AppCompatActivity() {
             intent.putExtra(NOTE_CONTENT, "")
             startActivity(intent)
         }
-    }
-
-    private fun retrieveFromDb(): ArrayList<NoteClass> {
-        val notes = ArrayList<NoteClass>()
-        try {
-            val noteClass : RealmResults<NoteClass>? = realm.where(NoteClass::class.java).findAll()
-            noteClass!!.forEach{
-                notes.addAll(0, realm!!.copyFromRealm(noteClass))
-            }
-        } finally {
-            if (realm != null) {
-                realm!!.close()
-            }
-        }
-        return notes
     }
 
     private fun sideMenuWidgets() {
@@ -126,7 +103,5 @@ class NoteListActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        realm!!.removeChangeListener(realmChangeListener!!)
-        realm!!.close()
     }
 }

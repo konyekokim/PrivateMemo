@@ -15,7 +15,7 @@ import java.util.ArrayList
  * Created by ALPHA AND JAM on 11/22/2017.
  */
 
-class NoteAdapter(context: Context, resources: Int,  var noteClassArrayList: ArrayList<NoteClass>) : ArrayAdapter<NoteClass>(context, resources, noteClassArrayList) {
+class NoteAdapter(context: Context, resources: Int,  var noteClassArrayList: List<NoteClass>) : ArrayAdapter<NoteClass>(context, resources, noteClassArrayList) {
 
 
     override fun getView(position: Int, convertView: View?, container: ViewGroup): View {

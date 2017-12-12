@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
-apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -35,15 +35,19 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
-
-realm {
-    syncEnabled = true;
+    compile 'com.google.firebase:firebase-auth:11.6.2'
+    compile 'com.google.android.gms:play-services-auth:11.6.2'
+    compile 'com.google.dagger:dagger:2.5'
+    kapt 'com.google.dagger:dagger-compiler:2.5'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 }
 
 apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
 }
+apply plugin: 'realm-android'
+realm {
+    syncEnabled = true;
+}
 
-apply plugin: 'kotlin-android-extensions'

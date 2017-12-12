@@ -19,11 +19,15 @@ import android.widget.Toast
 
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import android.provider.Settings.EXTRA_AUTHORITIES
-
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.*
+import kotlinx.android.synthetic.main.content_private_register.*
 
 
 class PrivateRegisterActivity : AppCompatActivity() {
@@ -33,21 +37,31 @@ class PrivateRegisterActivity : AppCompatActivity() {
     private var confirmPasswordEdit: EditText? = null
     private var createAcctButton: Button? = null
     private var signInLayout: LinearLayout? = null
-    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var mAuth: FirebaseAuth? = null
     private var progressDialog: ProgressDialog? = null
+    private var mGoogleSignInClient : GoogleSignInClient? = null
+    private val RC_SIGN_IN : Int = 1001
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_private_register)
         setFullScreen()
         viewActions()
+        mAuth = FirebaseAuth.getInstance()
         progressDialog = ProgressDialog(this)
         /*if (mAuth.currentUser != null) {
             val intent = Intent(applicationContext, NoteListActivity::class.java)
             startActivity(intent)
         }*/
+        val gso : GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
+
     private fun viewActions() {
+        sign_in_button.setSize(SignInButton.SIZE_STANDARD)
+        sign_in_button.setOnClickListener {
+            googleSignIn()
+        }
         privateNameEdit = findViewById<View>(R.id.private_name_editText) as EditText
         emailEdit = findViewById<View>(R.id.email_add_editText) as EditText
         passwordEdit = findViewById<View>(R.id.password_editText) as EditText
@@ -67,6 +81,44 @@ class PrivateRegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun googleSignIn(){
+        val signInIntent : Intent = mGoogleSignInClient!!.signInIntent
+        startActivityForResult(signInIntent,RC_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...)
+        if(requestCode == RC_SIGN_IN){
+            val task : Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try{
+                //Google sign in was successful, authenticate with Firebase
+                val account : GoogleSignInAccount = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account)
+            }catch (e : ApiException){
+                Log.w("api error","Google Sign In failed", e)
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(account : GoogleSignInAccount){
+        Log.d("tag","firebase with Google" + account.id)
+        val credential : AuthCredential = GoogleAuthProvider.getCredential(account.idToken,null)
+        mAuth!!.signInWithCredential(credential)
+                .addOnCompleteListener(this){ task ->
+                    if(task.isSuccessful){
+                        //Sign in is successful, move to next activity
+                        val user : FirebaseUser = mAuth!!.currentUser!!
+                        Toast.makeText(applicationContext, "Account created successfully", Toast.LENGTH_LONG).show()
+                        val intent = Intent(applicationContext, PrivateSignInActivity:: class.java)
+                        startActivity(intent)
+                    }else{
+                        //if sign in fails
+                        Toast.makeText(applicationContext,"google authentication failed", Toast.LENGTH_LONG).show()
+                    }
+                }
+    }
+
     private fun createAccount() {
         val email :String = emailEdit!!.text.toString()
         val password : String = passwordEdit!!.text.toString()
@@ -82,7 +134,7 @@ class PrivateRegisterActivity : AppCompatActivity() {
         }
         progressDialog!!.setMessage("Creating Account")
         progressDialog!!.show()
-        mAuth.createUserWithEmailAndPassword(email,password)
+        mAuth!!.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
@@ -100,7 +152,7 @@ class PrivateRegisterActivity : AppCompatActivity() {
     }
 
     private fun verifyEmail(){
-        val mUser = mAuth.currentUser
+        val mUser = mAuth!!.currentUser
         mUser!!.sendEmailVerification()
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

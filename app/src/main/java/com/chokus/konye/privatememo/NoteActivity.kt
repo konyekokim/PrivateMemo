@@ -12,22 +12,22 @@ import android.widget.Toast
 
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import java.text.SimpleDateFormat
+import java.util.*
+import javax.inject.Inject
 
 class NoteActivity : AppCompatActivity() {
-    val realm by lazy{Realm.getDefaultInstance()}
     private var noteTitleEditView: EditText? = null
     private var noteContentEditView: EditText? = null
     private var noteTitle: String? = null
     private var noteContent: String? = null
     private var saveNoteButton: Button? = null
     private var note: NoteClass? = null
-    private var dateCreated: String? = null
+    var noteId = -1L
+    @Inject lateinit var noteRealmManager : NoteRealmManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
-        Realm.init(this)
-        val config = RealmConfiguration.Builder().name("notes.realm").build()
-        Realm.setDefaultConfiguration(config)
         note = NoteClass()
         setFullScreen()
         receivingStringExtras()
@@ -41,29 +41,28 @@ class NoteActivity : AppCompatActivity() {
         noteTitleEditView!!.setText(noteTitle)
         noteContentEditView!!.setText(noteContent)
         saveNoteButton!!.setOnClickListener {
-            dateCreated = note!!.creationDate()
+            val dateCreated : String = creationDate()
             saveMemo(dateCreated)
             val intent = Intent(applicationContext, NoteListActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
+    fun creationDate(): String {
+        val myDate = Date()
+        val calendar = Calendar.getInstance()
+        calendar.timeZone = TimeZone.getTimeZone("UTC")
+        calendar.time = myDate
+        val time = calendar.time
+        val outputFmt = SimpleDateFormat("MMM dd, yyy h:mm a zz")
+        val dateCreated: String= outputFmt.format(time)
+        return dateCreated
+    }
 
-    private fun saveMemo(dateCreated: String?) {
+    private fun saveMemo(dateCreated: String) {
         val title = noteTitleEditView!!.text.toString().trim { it <= ' ' }
         val content = noteContentEditView!!.text.toString().trim { it <= ' ' }
-        realm.executeTransactionAsync({ bgRealm ->
-            val noteClass = bgRealm.createObject(NoteClass::class.java)
-            noteClass.noteTitle = title
-            noteClass.noteContent = content
-            noteClass.dateCreated = dateCreated
-        }, {
-            // Transaction was a success.
-            Toast.makeText(applicationContext, "Successfully Saved", Toast.LENGTH_LONG).show()
-        }) {
-            // Transaction failed and was automatically canceled.
-            Toast.makeText(applicationContext, "Something went wrong, failure in saving", Toast.LENGTH_LONG).show()
-        }
+        noteRealmManager.insert(title, content, dateCreated)
     }
 
     private fun receivingStringExtras() {
@@ -78,6 +77,5 @@ class NoteActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        realm!!.close()
     }
 }
