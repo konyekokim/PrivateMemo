@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/user_name_textView"
-                android:text="Susan"
+                android:text="Oma"
                 android:textColor="#757575"
                 android:layout_marginTop="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
