@@ -46,6 +46,18 @@
             android:choiceMode="singleChoice"
             android:divider="@null"
             android:dividerHeight="0dp" />
+        
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_layout"
+            android:scrollbars="vertical"
+            android:id="@+id/note_recyclerView"
+            android:visibility="invisible">
+
+
+
+        </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
 

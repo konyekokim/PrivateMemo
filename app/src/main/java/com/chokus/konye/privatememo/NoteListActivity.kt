@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.WindowManager
@@ -14,6 +15,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.RelativeLayout
 import io.realm.*
+import kotlinx.android.synthetic.main.content_note_list.*
 
 import java.util.ArrayList
 import java.util.Collections
@@ -32,6 +34,7 @@ class NoteListActivity : AppCompatActivity() {
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
     @Inject lateinit var noteRealmManager : NoteRealmManager
+    private lateinit var linearLayoutManager : LinearLayoutManager
     companion object {
         const val NOTE_TITLE = "com.chokus.konye.privatememo NoteTitle"
         const val NOTE_CONTENT = "com.chokus.konye.privatememo NoteContent"
@@ -42,7 +45,9 @@ class NoteListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_list)
         setFullScreen()
+        //initializing lateinit variables
         noteRealmManager = NoteRealmManager()
+        linearLayoutManager = LinearLayoutManager(this)
         noteClassList = noteRealmManager.findAll()
         viewActions()
         scrollMyListViewToBottom()
@@ -51,6 +56,7 @@ class NoteListActivity : AppCompatActivity() {
 
     private fun viewActions() {
         noteListView = findViewById<View>(R.id.note_listView) as ListView
+        note_recyclerView.layoutManager = linearLayoutManager
         noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
         noteListView.adapter = noteAdapter
         noteListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
