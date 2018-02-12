@@ -58,7 +58,7 @@ class NoteListActivity : AppCompatActivity() {
         //noteListView = findViewById<View>(R.id.note_listView) as ListView
         note_recyclerView.layoutManager = linearLayoutManager
         //noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
-        noteRecyclerAdapter = NoteRecyclerAdapter(notesList)
+        noteRecyclerAdapter = NoteRecyclerAdapter(notesList, this)
         note_recyclerView.adapter = noteRecyclerAdapter
         /*noteListView.adapter = noteAdapter
         noteListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
