@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/note_item_relative_layout">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,9 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="The body of the note, this contains the content of the Note that is title Note Title"
+        android:layout_below="@+id/note_title_textView"
         android:id="@+id/note_content_textView"
         android:textColor="#757575"
-        android:layout_below="@+id/note_title_textView"
         android:ellipsize="end"
         android:singleLine="true" />
 
@@ -30,8 +31,8 @@
         android:layout_marginTop="2dp"
         android:text="9/02/04"
         android:id="@+id/note_date_created_textView"
-        android:textColor="#757575"
         android:layout_below="@+id/note_content_textView"
+        android:textColor="#757575"
         android:ellipsize="end"
         android:singleLine="true" />
 

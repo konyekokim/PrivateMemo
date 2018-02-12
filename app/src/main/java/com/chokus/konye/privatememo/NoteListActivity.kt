@@ -10,10 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.RelativeLayout
+import android.widget.*
 import io.realm.*
 import kotlinx.android.synthetic.main.content_note_list.*
 
@@ -25,7 +22,9 @@ import kotlin.properties.Delegates
 class NoteListActivity : AppCompatActivity() {
     private var noteListView: ListView by Delegates.notNull()
     private var noteAdapter: NoteAdapter? = null
+    private var noteRecyclerAdapter : NoteRecyclerAdapter? = null
     private var noteClassList: List<NoteClass> by Delegates.notNull()
+    private var notesList: List<NoteClass> by Delegates.notNull()
     private var noteDrawerLayout: DrawerLayout? = null
     private var newNoteLayout: RelativeLayout? = null
     private var encryptLayout: RelativeLayout? = null
@@ -47,8 +46,9 @@ class NoteListActivity : AppCompatActivity() {
         setFullScreen()
         //initializing lateinit variables
         noteRealmManager = NoteRealmManager()
-        linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         noteClassList = noteRealmManager.findAll()
+        notesList = noteRealmManager.findAll()
         viewActions()
         scrollMyListViewToBottom()
         sideMenuWidgets()
@@ -58,6 +58,8 @@ class NoteListActivity : AppCompatActivity() {
         noteListView = findViewById<View>(R.id.note_listView) as ListView
         note_recyclerView.layoutManager = linearLayoutManager
         noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
+        noteRecyclerAdapter = NoteRecyclerAdapter(notesList)
+        note_recyclerView.adapter = noteRecyclerAdapter
         noteListView.adapter = noteAdapter
         noteListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(applicationContext, NoteActivity::class.java)
