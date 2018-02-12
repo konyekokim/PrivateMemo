@@ -47,24 +47,24 @@ class NoteListActivity : AppCompatActivity() {
         //initializing lateinit variables
         noteRealmManager = NoteRealmManager()
         linearLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        noteClassList = noteRealmManager.findAll()
+        //noteClassList = noteRealmManager.findAll()
         notesList = noteRealmManager.findAll()
         viewActions()
-        scrollMyListViewToBottom()
+        //scrollMyListViewToBottom()
         sideMenuWidgets()
     }
 
     private fun viewActions() {
-        noteListView = findViewById<View>(R.id.note_listView) as ListView
+        //noteListView = findViewById<View>(R.id.note_listView) as ListView
         note_recyclerView.layoutManager = linearLayoutManager
-        noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
+        //noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
         noteRecyclerAdapter = NoteRecyclerAdapter(notesList)
         note_recyclerView.adapter = noteRecyclerAdapter
-        noteListView.adapter = noteAdapter
+        /*noteListView.adapter = noteAdapter
         noteListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(applicationContext, NoteActivity::class.java)
             startActivity(intent)
-        }
+        }*/
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
         fab.setOnClickListener {
             val intent = Intent(applicationContext, NoteActivity::class.java)
