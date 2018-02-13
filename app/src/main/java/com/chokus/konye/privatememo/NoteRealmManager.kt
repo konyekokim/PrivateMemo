@@ -2,6 +2,7 @@ package com.chokus.konye.privatememo
 
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.Sort
 
 /**
  * Created by ALPHA AND JAM on 12/12/2017.
@@ -21,7 +22,7 @@ class NoteRealmManager{
     }
 
     fun findAll(): List<NoteClass>{
-        return realm.where(NoteClass::class.java).findAll()
+        return realm.where(NoteClass::class.java).findAllSorted("id",Sort.DESCENDING)
     }
 
     fun insert(title: String, content: String, dateCreated: String){
