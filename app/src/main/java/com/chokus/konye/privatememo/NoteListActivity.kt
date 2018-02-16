@@ -24,7 +24,7 @@ class NoteListActivity : AppCompatActivity() {
     private var noteAdapter: NoteAdapter? = null
     private var noteRecyclerAdapter : NoteRecyclerAdapter? = null
     private var noteClassList: List<NoteClass> by Delegates.notNull()
-    private var notesList: MutableList<NoteClass> by Delegates.notNull()
+    private var notesList: List<NoteClass> by Delegates.notNull()
     private var noteDrawerLayout: DrawerLayout? = null
     private var newNoteLayout: RelativeLayout? = null
     private var encryptLayout: RelativeLayout? = null
@@ -52,6 +52,7 @@ class NoteListActivity : AppCompatActivity() {
         viewActions()
         //scrollMyListViewToBottom()
         sideMenuWidgets()
+        //add a realmchange listener
     }
 
     private fun viewActions() {
@@ -60,6 +61,7 @@ class NoteListActivity : AppCompatActivity() {
         //noteAdapter = NoteAdapter(applicationContext, R.layout.note_list_item, noteClassList)
         noteRecyclerAdapter = NoteRecyclerAdapter(notesList, this)
         note_recyclerView.adapter = noteRecyclerAdapter
+        noteRecyclerAdapter!!.notifyDataSetChanged()
         /*noteListView.adapter = noteAdapter
         noteListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(applicationContext, NoteActivity::class.java)
@@ -72,6 +74,10 @@ class NoteListActivity : AppCompatActivity() {
             intent.putExtra(NOTE_CONTENT, "")
             startActivity(intent)
         }
+    }
+
+    private fun swipeActions(){
+        
     }
 
     private fun sideMenuWidgets() {
@@ -91,16 +97,12 @@ class NoteListActivity : AppCompatActivity() {
         encryptLayout!!.setOnClickListener {
             //do action in here
             //just to test the delete function
-            noteRealmManager.deleteById(1)
         }
         saveToCloudLayout!!.setOnClickListener {
             //do action in here
         }
         logoutLayout!!.setOnClickListener {
             //let us use this to test the delete function
-            noteRealmManager.deleteById(2)
-            //adding this temporarily
-            noteDrawerLayout!!.closeDrawer(noteDrawerRelativeLayout!!)
         }
     }
 
