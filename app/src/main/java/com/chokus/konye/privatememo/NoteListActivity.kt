@@ -24,7 +24,7 @@ class NoteListActivity : AppCompatActivity() {
     private var noteAdapter: NoteAdapter? = null
     private var noteRecyclerAdapter : NoteRecyclerAdapter? = null
     private var noteClassList: List<NoteClass> by Delegates.notNull()
-    private var notesList: List<NoteClass> by Delegates.notNull()
+    private var notesList: MutableList<NoteClass> by Delegates.notNull()
     private var noteDrawerLayout: DrawerLayout? = null
     private var newNoteLayout: RelativeLayout? = null
     private var encryptLayout: RelativeLayout? = null
@@ -85,22 +85,29 @@ class NoteListActivity : AppCompatActivity() {
         topMenuIcon!!.setOnClickListener { noteDrawerLayout!!.openDrawer(noteDrawerRelativeLayout!!) }
         newNoteLayout!!.setOnClickListener {
             //do action in here
+            val intent = Intent(this, NoteActivity::class.java)
+            startActivity(intent)
         }
         encryptLayout!!.setOnClickListener {
             //do action in here
+            //just to test the delete function
+            noteRealmManager.deleteById(1)
         }
         saveToCloudLayout!!.setOnClickListener {
             //do action in here
         }
         logoutLayout!!.setOnClickListener {
-            //do action in here
+            //let us use this to test the delete function
+            noteRealmManager.deleteById(2)
+            //adding this temporarily
+            noteDrawerLayout!!.closeDrawer(noteDrawerRelativeLayout!!)
         }
     }
 
     private fun scrollMyListViewToBottom() {
-        noteListView!!.post {
+        noteListView.post {
             // Select the last row so it will scroll into view...
-            noteListView!!.setSelection(noteAdapter!!.count - 1)
+            noteListView.setSelection(noteAdapter!!.count - 1)
         }
     }
 
