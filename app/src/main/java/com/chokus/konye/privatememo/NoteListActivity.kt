@@ -1,13 +1,16 @@
 package com.chokus.konye.privatememo
 
 import android.content.Intent
+import android.graphics.*
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
@@ -32,6 +35,7 @@ class NoteListActivity : AppCompatActivity() {
     private var logoutLayout: RelativeLayout? = null
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
+    private val paint = Paint()
     @Inject lateinit var noteRealmManager : NoteRealmManager
     private lateinit var linearLayoutManager : LinearLayoutManager
     companion object {
@@ -77,7 +81,44 @@ class NoteListActivity : AppCompatActivity() {
     }
 
     private fun swipeActions(){
-        
+        val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+            override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                val position =  viewHolder!!.adapterPosition
+                if(direction == ItemTouchHelper.LEFT){
+                    noteRealmManager.deleteById(notesList.get(position).id)
+                }else{
+                    //send intent to note activity for editing of note
+                }
+            }
+
+            override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                val icon : Bitmap
+                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    val itemView = viewHolder!!.itemView
+                    val height = itemView.bottom.toFloat() - itemView.top.toFloat()
+                    val width = height/3
+
+                    if(dX >  0){
+                        paint.color = Color.parseColor("#388e3c")
+                        val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(),dX,itemView.bottom.toFloat())
+                        c!!.drawRect(background,paint)
+                        c.drawText("EDIT",itemView.left.toFloat()+width,itemView.top.toFloat() + 2, paint)
+                    }else{
+                        paint.color = Color.parseColor("#d32f2f")
+                        val background = RectF(itemView.right.toFloat()+dX, itemView.top.toFloat(),itemView.left.toFloat(),itemView.bottom.toFloat())
+                        c!!.drawRect(background,paint)
+                        c.drawText("DELETE", itemView.right.toFloat() - 2*width, itemView.top.toFloat()-2*width,paint)
+                    }
+                }
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(note_recyclerView)
     }
 
     private fun sideMenuWidgets() {
