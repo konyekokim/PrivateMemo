@@ -22,6 +22,7 @@ class NoteActivity : AppCompatActivity() {
     private var noteTitle: String? = null
     private var noteContent: String? = null
     private var saveNoteButton: Button? = null
+    private var noteAdapter: NoteRecyclerAdapter? = null
     private var note: NoteClass? = null
     var noteId = -1L
     @Inject lateinit var noteRealmManager : NoteRealmManager

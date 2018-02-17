@@ -27,7 +27,7 @@ class NoteListActivity : AppCompatActivity() {
     private var noteAdapter: NoteAdapter? = null
     private var noteRecyclerAdapter : NoteRecyclerAdapter? = null
     private var noteClassList: List<NoteClass> by Delegates.notNull()
-    private var notesList: List<NoteClass> by Delegates.notNull()
+    private var notesList: MutableList<NoteClass> = mutableListOf<NoteClass>()
     private var noteDrawerLayout: DrawerLayout? = null
     private var newNoteLayout: RelativeLayout? = null
     private var encryptLayout: RelativeLayout? = null
@@ -35,7 +35,8 @@ class NoteListActivity : AppCompatActivity() {
     private var logoutLayout: RelativeLayout? = null
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
-    private val paint = Paint()
+    private val backGroundPaint = Paint()
+    private val textPaint = Paint()
     @Inject lateinit var noteRealmManager : NoteRealmManager
     private lateinit var linearLayoutManager : LinearLayoutManager
     companion object {
@@ -78,6 +79,7 @@ class NoteListActivity : AppCompatActivity() {
             intent.putExtra(NOTE_CONTENT, "")
             startActivity(intent)
         }
+        swipeActions()
     }
 
     private fun swipeActions(){
@@ -90,6 +92,7 @@ class NoteListActivity : AppCompatActivity() {
                 val position =  viewHolder!!.adapterPosition
                 if(direction == ItemTouchHelper.LEFT){
                     noteRealmManager.deleteById(notesList.get(position).id)
+                    noteRecyclerAdapter!!.removeItem(position)
                 }else{
                     //send intent to note activity for editing of note
                 }
@@ -104,16 +107,20 @@ class NoteListActivity : AppCompatActivity() {
 
                     if(dX >  0){
                         //i.e swiping right to edit
-                        paint.color = Color.parseColor("#388e3c")
+                        backGroundPaint.color = Color.parseColor("#388e3c")
+                        textPaint.color = Color.WHITE
+                        textPaint.textSize = 30F
                         val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(),dX,itemView.bottom.toFloat())
-                        c!!.drawRect(background,paint)
-                        c.drawText("EDIT",itemView.left.toFloat()+width,itemView.top.toFloat() + 2, paint)
+                        c!!.drawRect(background,backGroundPaint)
+                        c.drawText("EDIT",itemView.left.toFloat()+width,itemView.top.toFloat() + 2, textPaint)
                     }else{
                         //i.e swiping right to delete
-                        paint.color = Color.parseColor("#d32f2f")
+                        backGroundPaint.color = Color.parseColor("#d32f2f")
+                        textPaint.color = Color.WHITE
+                        textPaint.textSize = 30F
                         val background = RectF(itemView.right.toFloat()+dX, itemView.top.toFloat(),itemView.left.toFloat(),itemView.bottom.toFloat())
-                        c!!.drawRect(background,paint)
-                        c.drawText("DELETE", itemView.right.toFloat() - 2*width, itemView.top.toFloat()-2*width,paint)
+                        c!!.drawRect(background,backGroundPaint)
+                        c.drawText("DELETE", itemView.right.toFloat() - 2*width, itemView.top.toFloat()-2*width,textPaint)
                     }
                 }
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
@@ -139,13 +146,12 @@ class NoteListActivity : AppCompatActivity() {
         }
         encryptLayout!!.setOnClickListener {
             //do action in here
-            //just to test the delete function
         }
         saveToCloudLayout!!.setOnClickListener {
             //do action in here
         }
         logoutLayout!!.setOnClickListener {
-            //let us use this to test the delete function
+            //do action in here
         }
     }
 

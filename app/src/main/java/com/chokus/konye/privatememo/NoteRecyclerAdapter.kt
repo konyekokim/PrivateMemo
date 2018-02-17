@@ -13,7 +13,7 @@ import kotlin.properties.Delegates
 /**
  * Created by omen on 12/02/2018.
  */
-class NoteRecyclerAdapter(var noteList : List<NoteClass>, context: Context) : RecyclerView.Adapter<NoteRecyclerAdapter.MyViewHolder>(){
+class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Context) : RecyclerView.Adapter<NoteRecyclerAdapter.MyViewHolder>(){
     var mContext = context
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.note_list_item, parent, false)
@@ -57,6 +57,12 @@ class NoteRecyclerAdapter(var noteList : List<NoteClass>, context: Context) : Re
         override fun onClick(v: View?) {
             this.customItemClickListener!!.onCustomItemClickListener(v!!,adapterPosition)
         }
+    }
+
+    fun removeItem(position: Int){
+        //noteList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, noteList.size)
     }
 
 }

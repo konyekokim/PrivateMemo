@@ -21,7 +21,7 @@ class NoteRealmManager{
         return  realm.where(NoteClass::class.java).equalTo("id",id).findFirst()
     }
 
-    fun findAll(): List<NoteClass>{
+    fun findAll(): MutableList<NoteClass>{
         return realm.where(NoteClass::class.java).findAllSorted("id",Sort.DESCENDING)
     }
 
