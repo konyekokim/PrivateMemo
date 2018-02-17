@@ -103,11 +103,13 @@ class NoteListActivity : AppCompatActivity() {
                     val width = height/3
 
                     if(dX >  0){
+                        //i.e swiping right to edit
                         paint.color = Color.parseColor("#388e3c")
                         val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(),dX,itemView.bottom.toFloat())
                         c!!.drawRect(background,paint)
                         c.drawText("EDIT",itemView.left.toFloat()+width,itemView.top.toFloat() + 2, paint)
                     }else{
+                        //i.e swiping right to delete
                         paint.color = Color.parseColor("#d32f2f")
                         val background = RectF(itemView.right.toFloat()+dX, itemView.top.toFloat(),itemView.left.toFloat(),itemView.bottom.toFloat())
                         c!!.drawRect(background,paint)
