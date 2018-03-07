@@ -1,4 +1,4 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.application
 
 import android.app.Application
 import io.realm.Realm

@@ -1,4 +1,4 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.interfaces
 
 import android.view.View
 

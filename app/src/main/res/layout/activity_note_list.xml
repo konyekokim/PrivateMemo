@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.chokus.konye.privatememo.NoteListActivity">
+    tools:context="com.chokus.konye.privatememo.activity.NoteListActivity">
 
     <include layout="@layout/content_note_list" />
 

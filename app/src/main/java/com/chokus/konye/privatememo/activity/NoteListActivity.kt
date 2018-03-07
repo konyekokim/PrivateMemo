@@ -1,24 +1,24 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.activity
 
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
-import io.realm.*
+import com.chokus.konye.privatememo.adapter.NoteAdapter
+import com.chokus.konye.privatememo.datamodel.NoteClass
+import com.chokus.konye.privatememo.datamanager.NoteRealmManager
+import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
+import com.chokus.konye.privatememo.R
 import kotlinx.android.synthetic.main.content_note_list.*
 
-import java.util.ArrayList
-import java.util.Collections
 import javax.inject.Inject
 import kotlin.properties.Delegates
 

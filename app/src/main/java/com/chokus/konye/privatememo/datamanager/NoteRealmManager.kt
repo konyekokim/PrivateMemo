@@ -1,5 +1,6 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.datamanager
 
+import com.chokus.konye.privatememo.datamodel.NoteClass
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.Sort

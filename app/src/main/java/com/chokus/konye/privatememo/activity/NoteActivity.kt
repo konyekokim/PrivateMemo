@@ -1,17 +1,17 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.activity
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import com.chokus.konye.privatememo.datamodel.NoteClass
+import com.chokus.konye.privatememo.datamanager.NoteRealmManager
+import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
+import com.chokus.konye.privatememo.R
 
-import io.realm.Realm
-import io.realm.RealmConfiguration
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject

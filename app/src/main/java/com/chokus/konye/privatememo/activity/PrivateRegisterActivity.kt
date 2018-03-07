@@ -1,13 +1,9 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.activity
 
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -17,9 +13,8 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import android.provider.Settings.EXTRA_AUTHORITIES
+import com.chokus.konye.privatememo.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -170,7 +165,7 @@ class PrivateRegisterActivity : AppCompatActivity() {
 
     private fun updateUser(){
         //start next activity
-        val intent = Intent(applicationContext,PrivateSignInActivity::class.java)
+        val intent = Intent(applicationContext, PrivateSignInActivity::class.java)
         startActivity(intent)
     }
 

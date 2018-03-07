@@ -1,4 +1,4 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.datamodel
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

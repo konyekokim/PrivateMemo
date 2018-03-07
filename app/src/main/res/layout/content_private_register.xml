@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E0E0E0"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.chokus.konye.privatememo.PrivateRegisterActivity"
+    tools:context="com.chokus.konye.privatememo.activity.PrivateRegisterActivity"
     tools:showIn="@layout/activity_private_register">
 
     <TextView

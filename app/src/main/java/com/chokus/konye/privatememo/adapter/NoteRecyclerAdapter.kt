@@ -1,4 +1,4 @@
-package com.chokus.konye.privatememo
+package com.chokus.konye.privatememo.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import javax.inject.Inject
-import kotlin.properties.Delegates
+import com.chokus.konye.privatememo.datamodel.NoteClass
+import com.chokus.konye.privatememo.R
+import com.chokus.konye.privatememo.activity.NoteActivity
+import com.chokus.konye.privatememo.activity.NoteListActivity
+import com.chokus.konye.privatememo.interfaces.CustomItemClickListener
 
 /**
  * Created by omen on 12/02/2018.
@@ -29,7 +32,7 @@ class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Contex
         holder!!.noteTitleTextView.text = notes.noteTitle
         holder.noteContentTextView.text = notes.noteContent
         holder.noteDateCreatedTextView.text = notes.dateCreated
-        holder.setOnCustomItemClickListener(object : CustomItemClickListener{
+        holder.setOnCustomItemClickListener(object : CustomItemClickListener {
             override fun onCustomItemClickListener(view: View, position: Int) {
                 val intent = Intent(mContext, NoteActivity::class.java)
                 intent.putExtra(NoteListActivity.NOTE_TITLE, notes.noteTitle)
@@ -50,7 +53,7 @@ class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Contex
             noteDateCreatedTextView = itemView.findViewById(R.id.note_date_created_textView)
             itemView.setOnClickListener(this)
         }
-        fun setOnCustomItemClickListener(itemClickListener:CustomItemClickListener){
+        fun setOnCustomItemClickListener(itemClickListener: CustomItemClickListener){
             this.customItemClickListener = itemClickListener
         }
 
