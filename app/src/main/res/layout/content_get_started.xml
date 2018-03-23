@@ -36,7 +36,8 @@
             android:hint="@string/enter_email_hint"
             android:inputType="textEmailAddress"
             android:background="@android:color/transparent"
-            android:textColorHint="@color/colorThemeDarker"
+            android:textColorHint="@color/colorThemeLighter"
+            android:textColor="@color/colorThemeDarker"
             android:id="@+id/get_started_email"/>
 
         <TextView
