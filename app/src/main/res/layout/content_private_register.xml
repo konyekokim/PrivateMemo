@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:background="@drawable/sign_register_bg"
+            android:background="@drawable/register_bg"
             android:id="@+id/sign_up_layout">
 
             <EditText
