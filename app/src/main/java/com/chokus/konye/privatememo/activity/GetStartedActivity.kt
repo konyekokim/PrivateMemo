@@ -25,14 +25,14 @@ class GetStartedActivity : AppCompatActivity() {
 
     private fun viewActions(){
         sign_in_textView.setOnClickListener {
-            val intent = Intent(this, PrivateRegisterActivity::class.java)
+            val intent = Intent(this, PrivateSignInActivity::class.java)
             if(get_started_email != null){
                 intent.putExtra(USER_EMAIL,get_started_email.text)
                 startActivity(intent)
             }
         }
         forward_arrow_img.setOnClickListener {
-            val intent = Intent(this, PrivateRegisterActivity::class.java)
+            val intent = Intent(this, PrivateSignInActivity::class.java)
             if(get_started_email != null){
                 intent.putExtra(USER_EMAIL,get_started_email.text)
                 startActivity(intent)
