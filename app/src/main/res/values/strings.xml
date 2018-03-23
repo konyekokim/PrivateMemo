@@ -6,4 +6,9 @@
     <string name="title_activity_get_started">GetStartedActivity</string>
     <string name="enter_email_hint">Enter email address</string>
     <string name="sign_in_text">Sign In</string>
+    <string name="user_username">UserName</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="user_confirm_password">Confirm Password</string>
+    <string name="sign_up_text">Sign up</string>
 </resources>
