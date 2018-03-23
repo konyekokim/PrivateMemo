@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
+import android.widget.Toast
 import com.chokus.konye.privatememo.R
 
 import kotlinx.android.synthetic.main.activity_get_started.*
@@ -26,16 +27,20 @@ class GetStartedActivity : AppCompatActivity() {
     private fun viewActions(){
         sign_in_textView.setOnClickListener {
             val intent = Intent(this, PrivateSignInActivity::class.java)
-            if(get_started_email != null){
+            if(get_started_email.text.trim().isNotEmpty()){
                 intent.putExtra(USER_EMAIL,get_started_email.text)
                 startActivity(intent)
+            }else{
+                Toast.makeText(this, "Enter your email  address", Toast.LENGTH_LONG).show()
             }
         }
         forward_arrow_img.setOnClickListener {
             val intent = Intent(this, PrivateSignInActivity::class.java)
-            if(get_started_email != null){
+            if(get_started_email.text.trim().isNotEmpty()){
                 intent.putExtra(USER_EMAIL,get_started_email.text)
                 startActivity(intent)
+            }else{
+                Toast.makeText(this, "Enter your email  address", Toast.LENGTH_LONG).show()
             }
         }
     }
