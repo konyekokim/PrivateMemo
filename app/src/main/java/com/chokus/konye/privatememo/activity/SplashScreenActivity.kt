@@ -16,7 +16,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         val WELCOME_TIMEOUT = 4000
         Handler().postDelayed({
-            val intent = Intent(applicationContext, PrivateRegisterActivity::class.java)
+            val intent = Intent(applicationContext, GetStartedActivity::class.java)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             startActivity(intent)
             finish()
