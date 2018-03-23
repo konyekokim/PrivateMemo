@@ -22,7 +22,8 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:background="@drawable/sign_bg"
-            android:id="@+id/sign_in_linear_layout">
+            android:id="@+id/sign_in_linear_layout"
+            android:alpha="0.8">
 
             <EditText
                 android:layout_width="match_parent"
