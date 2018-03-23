@@ -14,12 +14,9 @@ import android.widget.Toast
 import com.chokus.konye.privatememo.R
 
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_private_sign_in.*
 
 class PrivateSignInActivity : AppCompatActivity() {
-    var emailEdit: EditText? = null
-    var passwordEdit: EditText? = null
-    var signInButton: Button? = null
-    var createAcct: LinearLayout? = null
     private var mAuth: FirebaseAuth? = null
     var email: String? = null
     var password: String? = null
@@ -34,42 +31,14 @@ class PrivateSignInActivity : AppCompatActivity() {
     }
 
     private fun viewActions() {
-        emailEdit = findViewById<View>(R.id.email_add_editText) as EditText
-        passwordEdit = findViewById<View>(R.id.password_editText) as EditText
-        signInButton = findViewById<View>(R.id.sign_in_button) as Button
-        createAcct = findViewById<View>(R.id.create_acct_layout) as LinearLayout
-        createAcct!!.setOnClickListener {
-            val intent = Intent(applicationContext, PrivateRegisterActivity::class.java)
+        sign_in_button.setOnClickListener {
+            val intent = Intent(this, NoteListActivity::class.java)
             startActivity(intent)
         }
-        signInButton!!.setOnClickListener { signIn() }
-    }
-
-    private fun signIn() {
-        email = emailEdit!!.text.toString().trim { it <= ' ' }
-        password = passwordEdit!!.text.toString().trim { it <= ' ' }
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "please enter Email", Toast.LENGTH_SHORT).show()
+        sign_up_button.setOnClickListener{
+            val intent = Intent(this, PrivateRegisterActivity::class.java)
+            startActivity(intent)
         }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(applicationContext, "please enter Password", Toast.LENGTH_SHORT).show()
-        }
-        progressDialog!!.setMessage("Signing In")
-        progressDialog!!.show()
-        mAuth!!.signInWithEmailAndPassword(email!!, password!!)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        val user = mAuth!!.currentUser
-                        Toast.makeText(applicationContext, "Sign In successful", Toast.LENGTH_SHORT).show()
-                        finish()
-                        startActivity(Intent(applicationContext, NoteListActivity::class.java))
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(applicationContext, "Error in Sign In", Toast.LENGTH_SHORT).show()
-                    }
-                    progressDialog!!.dismiss()
-                }
     }
 
     private fun setFullScreen() {
