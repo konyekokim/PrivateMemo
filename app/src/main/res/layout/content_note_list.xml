@@ -17,7 +17,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/header_layout">
+            android:id="@+id/header_layout"
+            android:background="@color/colorThemeDarker">
 
             <ImageView
                 android:layout_width="32dp"
@@ -25,16 +26,52 @@
                 android:id="@+id/top_menu_icon"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/locked"/>
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/ic_menu"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_height="1.8dp"
-                android:background="#757575"
+                android:background="#9e9e9e"
                 android:layout_alignParentBottom="true"/>
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:src="@mipmap/ic_search"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_box"
+                android:layout_toEndOf="@+id/top_menu_icon"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:visibility="invisible">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_marginEnd="25dp"
+                    android:id="@+id/search_textView"
+                    android:textColor="@color/secondaryColor"
+                    android:background="@android:color/transparent"/>
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/ic_cancel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -46,13 +83,20 @@
             android:choiceMode="singleChoice"
             android:divider="@null"
             android:dividerHeight="0dp" />-->
-        
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/header_layout"
             android:scrollbars="vertical"
             android:id="@+id/note_recyclerView"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/new_note_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
 
