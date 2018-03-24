@@ -12,4 +12,10 @@
     <string name="user_confirm_password">Confirm Password</string>
     <string name="sign_up_text">Sign up</string>
     <string name="search_hint">Search memo</string>
+    <string name="default_email">konyekokim@gmail.com</string>
+    <string name="settings_text">Settings</string>
+    <string name="text_size_text">Text Size</string>
+    <string name="text_colours_text">Text Colours</string>
+    <string name="enable_encryption_text">Enable Encryption</string>
+    <string name="logout_text">Logout</string>
 </resources>

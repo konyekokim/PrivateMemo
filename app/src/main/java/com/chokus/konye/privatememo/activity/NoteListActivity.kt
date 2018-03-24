@@ -81,26 +81,8 @@ class NoteListActivity : AppCompatActivity() {
     private fun sideMenuWidgets() {
         noteDrawerLayout = findViewById<View>(R.id.note_drawer_layout) as DrawerLayout
         noteDrawerRelativeLayout = findViewById<View>(R.id.note_relative_drawer_layout) as RelativeLayout
-        newNoteLayout = findViewById<View>(R.id.new_note_side_layout) as RelativeLayout
-        encryptLayout = findViewById<View>(R.id.encrypt_side_layout) as RelativeLayout
-        saveToCloudLayout = findViewById<View>(R.id.cloud_save_side_layout) as RelativeLayout
-        logoutLayout = findViewById<View>(R.id.logout_side_layout) as RelativeLayout
         topMenuIcon = findViewById<View>(R.id.top_menu_icon) as ImageView
         topMenuIcon!!.setOnClickListener { noteDrawerLayout!!.openDrawer(noteDrawerRelativeLayout!!) }
-        newNoteLayout!!.setOnClickListener {
-            //do action in here
-            val intent = Intent(this, NoteActivity::class.java)
-            startActivity(intent)
-        }
-        encryptLayout!!.setOnClickListener {
-            //do action in here
-        }
-        saveToCloudLayout!!.setOnClickListener {
-            //do action in here
-        }
-        logoutLayout!!.setOnClickListener {
-            //do action in here
-        }
     }
 
     private fun scrollMyListViewToBottom() {

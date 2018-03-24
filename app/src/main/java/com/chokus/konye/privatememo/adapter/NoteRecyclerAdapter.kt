@@ -18,8 +18,8 @@ import com.chokus.konye.privatememo.interfaces.CustomItemClickListener
  */
 class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Context) : RecyclerView.Adapter<NoteRecyclerAdapter.MyViewHolder>(){
     var mContext = context
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.note_list_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.note_list_item, parent, false)
         return MyViewHolder(v)
     }
 
@@ -27,9 +27,9 @@ class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Contex
         return noteList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val notes: NoteClass = noteList[position]
-        holder!!.noteTitleTextView.text = notes.noteTitle
+        holder.noteTitleTextView.text = notes.noteTitle
         holder.noteContentTextView.text = notes.noteContent
         holder.noteDateCreatedTextView.text = notes.dateCreated
         holder.setOnCustomItemClickListener(object : CustomItemClickListener {
