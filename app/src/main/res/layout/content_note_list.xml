@@ -40,7 +40,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                android:src="@mipmap/ic_search"/>
+                android:src="@mipmap/ic_search"
+                android:id="@+id/search_imgView"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -50,8 +51,9 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:padding="5dp"
+                android:id="@+id/search_box_relativeLayout"
                 android:layout_centerVertical="true"
-                android:visibility="invisible">
+                android:visibility="gone">
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -61,6 +63,8 @@
                     android:layout_marginEnd="25dp"
                     android:id="@+id/search_textView"
                     android:textColor="@color/secondaryColor"
+                    android:hint="@string/search_hint"
+                    android:textColorHint="@color/colorThemeLighter"
                     android:background="@android:color/transparent"/>
 
                 <ImageView
@@ -68,7 +72,8 @@
                     android:layout_height="18dp"
                     android:src="@mipmap/ic_cancel"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:id="@+id/cancel_imgView"/>
 
             </RelativeLayout>
 
