@@ -78,7 +78,6 @@ class NoteListActivity : AppCompatActivity() {
             intent.putExtra(NOTE_CONTENT, "")
             startActivity(intent)
         }
-        swipeActions()
     }
 
     private fun swipeActions(){
