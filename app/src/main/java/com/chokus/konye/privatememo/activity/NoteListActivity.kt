@@ -72,8 +72,7 @@ class NoteListActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, NoteActivity::class.java)
             startActivity(intent)
         }*/
-        val fab = findViewById<View>(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener {
+        new_note_imageView.setOnClickListener {
             val intent = Intent(applicationContext, NoteActivity::class.java)
             intent.putExtra(NOTE_TITLE, "")
             intent.putExtra(NOTE_CONTENT, "")
