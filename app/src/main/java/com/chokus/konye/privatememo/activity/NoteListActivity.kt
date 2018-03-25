@@ -20,14 +20,9 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 class NoteListActivity : AppCompatActivity() {
-    private var noteListView: ListView by Delegates.notNull()
     private var noteRecyclerAdapter : NoteRecyclerAdapter? = null
     private var notesList: MutableList<NoteClass> = mutableListOf<NoteClass>()
     private var noteDrawerLayout: DrawerLayout? = null
-    private var newNoteLayout: RelativeLayout? = null
-    private var encryptLayout: RelativeLayout? = null
-    private var saveToCloudLayout: RelativeLayout? = null
-    private var logoutLayout: RelativeLayout? = null
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
     @Inject lateinit var noteRealmManager : NoteRealmManager
@@ -49,10 +44,8 @@ class NoteListActivity : AppCompatActivity() {
         val noOfColumns : Int = Utility.calculateNoOfColumns(this)
         gridLayoutManager = GridLayoutManager(this, noOfColumns)
         //linearLayoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        //noteClassList = noteRealmManager.findAll()
         notesList = noteRealmManager.findAll()
         viewActions()
-        //scrollMyListViewToBottom()
         sideMenuWidgets()
         //add a realmchange listener
     }
