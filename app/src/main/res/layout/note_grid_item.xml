@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/note_item_linear_layout"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_grid"
+        android:id="@+id/note_grid_imgView"/>
+    
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/default_note_name"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorThemeDarker"
+        android:id="@+id/note_title_textView"
+        android:ellipsize="end"
+        android:maxLines="2"/>
+
+</LinearLayout>

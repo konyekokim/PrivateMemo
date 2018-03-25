@@ -90,11 +90,14 @@
             android:dividerHeight="0dp" />-->
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_below="@+id/header_layout"
             android:scrollbars="vertical"
-            android:id="@+id/note_recyclerView"/>
+            android:id="@+id/note_recyclerView"
+            android:layout_centerHorizontal="true"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -108,7 +111,8 @@
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_centerInParent="true"
-            android:src="@mipmap/note_bg"/>
+            android:src="@mipmap/note_bg"
+            android:id="@+id/noteList_bg"/>
 
     </RelativeLayout>
 
