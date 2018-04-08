@@ -25,7 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text="@string/security_dialog_ok"
+        android:text="@string/save_dialog_save_text"
         android:textColor="@color/colorThemeDarker"
         android:layout_below="@+id/editText_line"
         android:layout_alignParentStart="true"

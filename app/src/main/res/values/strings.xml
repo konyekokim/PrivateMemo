@@ -24,4 +24,5 @@
     <string name="security_text_hint">Password</string>
     <string name="security_dialog_ok">Ok</string>
     <string name="security_dialog_cancel">Cancel</string>
+    <string name="save_dialog_save_text">Save</string>
 </resources>
