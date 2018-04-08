@@ -1,5 +1,6 @@
 package com.chokus.konye.privatememo.adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -13,12 +14,14 @@ import com.chokus.konye.privatememo.R
 import com.chokus.konye.privatememo.activity.NoteActivity
 import com.chokus.konye.privatememo.activity.NoteListActivity
 import com.chokus.konye.privatememo.interfaces.CustomItemClickListener
+import kotlinx.android.synthetic.main.security_dialog.*
 
 /**
  * Created by omen on 12/02/2018.
  */
 class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Context) : RecyclerView.Adapter<NoteRecyclerAdapter.MyViewHolder>(){
     var mContext = context
+    private var securityDialog : Dialog? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.note_grid_item, parent, false)
         return MyViewHolder(v)
@@ -34,10 +37,8 @@ class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Contex
         holder.noteGridImageView.setImageResource(R.mipmap.ic_grid)
         holder.setOnCustomItemClickListener(object : CustomItemClickListener {
             override fun onCustomItemClickListener(view: View, position: Int) {
-                val intent = Intent(mContext, NoteActivity::class.java)
-                intent.putExtra(NoteListActivity.NOTE_TITLE, notes.noteTitle)
-                intent.putExtra(NoteListActivity.NOTE_CONTENT,notes.noteContent)
-                mContext.startActivity(intent)
+                SecurityDialog(notes)
+                securityDialog!!.show()
             }
         })
     }
@@ -64,6 +65,22 @@ class NoteRecyclerAdapter(var noteList : MutableList<NoteClass>, context: Contex
         //noteList.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, noteList.size)
+    }
+
+    private fun SecurityDialog(notes : NoteClass){
+        securityDialog = Dialog(mContext)
+        securityDialog!!.setContentView(R.layout.security_dialog)
+        securityDialog!!.setCancelable(false)
+        securityDialog!!.dialog_ok_button.setOnClickListener {
+            val intent = Intent(mContext, NoteActivity::class.java)
+            intent.putExtra(NoteListActivity.NOTE_TITLE, notes.noteTitle)
+            intent.putExtra(NoteListActivity.NOTE_CONTENT,notes.noteContent)
+            mContext.startActivity(intent)
+            securityDialog!!.cancel()
+        }
+        securityDialog!!.dialog_cancel_button.setOnClickListener {
+            securityDialog!!.cancel()
+        }
     }
 
 }

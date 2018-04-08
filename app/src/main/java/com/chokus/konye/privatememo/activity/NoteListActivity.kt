@@ -1,5 +1,6 @@
 package com.chokus.konye.privatememo.activity
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
@@ -16,6 +17,7 @@ import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
 import com.chokus.konye.privatememo.R
 import com.chokus.konye.privatememo.Util.Utility
 import kotlinx.android.synthetic.main.content_note_list.*
+import kotlinx.android.synthetic.main.security_dialog.*
 
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -87,6 +89,7 @@ class NoteListActivity : AppCompatActivity() {
         topMenuIcon = findViewById<View>(R.id.top_menu_icon) as ImageView
         topMenuIcon!!.setOnClickListener { noteDrawerLayout!!.openDrawer(noteDrawerRelativeLayout!!) }
     }
+
 
     private fun setFullScreen() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
