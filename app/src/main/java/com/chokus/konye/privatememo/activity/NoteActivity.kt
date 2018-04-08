@@ -92,7 +92,6 @@ class NoteActivity : AppCompatActivity() {
         saveNoteDialog!!.setCancelable(false)
         saveNoteDialog!!.dialog_save_editText.text = noteTitleEditView!!.text
         saveNoteDialog!!.dialog_save_button.setOnClickListener {
-            //do whatever function you want here.
             val dateCreated : String = creationDate()
             noteTitleEditView!!.text = saveNoteDialog!!.dialog_save_editText.text
             saveMemo(dateCreated)
