@@ -6,4 +6,5 @@
     <color name="colorThemeLighter">#F39317</color>
     <color name="colorThemeDarker">#E85E03</color>
     <color name="secondaryColor">#ffffff</color>
+    <color name="note_background_color">#e0e0e0</color>
 </resources>

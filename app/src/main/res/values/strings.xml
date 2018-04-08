@@ -19,4 +19,6 @@
     <string name="enable_encryption_text">Enable Encryption</string>
     <string name="logout_text">Logout</string>
     <string name="default_note_name">B Loved</string>
+    <string name="note_placeholder">I dey vex o.. I dey really vex</string>
+    <string name="note_title_hint">untitled</string>
 </resources>

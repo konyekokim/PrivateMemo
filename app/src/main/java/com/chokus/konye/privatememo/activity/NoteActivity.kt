@@ -7,6 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.chokus.konye.privatememo.datamodel.NoteClass
 import com.chokus.konye.privatememo.datamanager.NoteRealmManager
 import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
@@ -21,7 +22,7 @@ class NoteActivity : AppCompatActivity() {
     private var noteContentEditView: EditText? = null
     private var noteTitle: String? = null
     private var noteContent: String? = null
-    private var saveNoteButton: Button? = null
+    private var checkImgView : ImageView? = null
     private var noteAdapter: NoteRecyclerAdapter? = null
     private var note: NoteClass? = null
     var noteId = -1L
@@ -39,10 +40,10 @@ class NoteActivity : AppCompatActivity() {
     private fun viewActions() {
         noteTitleEditView = findViewById<View>(R.id.note_title_editView) as EditText
         noteContentEditView = findViewById<View>(R.id.note_content_editView) as EditText
-        saveNoteButton = findViewById<View>(R.id.save_note_button) as Button
+        checkImgView = findViewById<View>(R.id.check_imageView) as ImageView
         noteTitleEditView!!.setText(noteTitle)
         noteContentEditView!!.setText(noteContent)
-        saveNoteButton!!.setOnClickListener {
+        checkImgView!!.setOnClickListener {
             val dateCreated : String = creationDate()
             saveMemo(dateCreated)
             val intent = Intent(applicationContext, NoteListActivity::class.java)
