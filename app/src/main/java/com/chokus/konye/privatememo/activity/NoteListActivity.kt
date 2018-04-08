@@ -251,7 +251,7 @@ class NoteListActivity : AppCompatActivity() {
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
         //change color of button text
-        positiveButton.setTextColor(resources.getColor(R.color.colorThemeLighter))
+        positiveButton.setTextColor(resources.getColor(R.color.colorThemeDarker))
         negativeButton.setTextColor(resources.getColor(R.color.colorThemeDarker))
     }
 
