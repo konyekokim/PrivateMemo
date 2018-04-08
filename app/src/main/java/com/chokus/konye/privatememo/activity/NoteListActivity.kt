@@ -35,6 +35,13 @@ class NoteListActivity : AppCompatActivity() {
         const val NOTE_TITLE = "com.chokus.konye.privatememo NoteTitle"
         const val NOTE_CONTENT = "com.chokus.konye.privatememo NoteContent"
         const val DATE_CREATED = "com.chokus.konye.privatememo DateCreated"
+        val MY_REQUEST_CAMERA = 101
+        val MY_REQUEST_WRITE_CAMERA = 102
+        val CAPTURE_CAMERA = 103
+
+        val MY_REQUEST_READ_GALLERY = 104
+        val MY_REQUEST_WRITE_GALLERY = 105
+        val MY_REQUEST_GALLERY = 106
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
