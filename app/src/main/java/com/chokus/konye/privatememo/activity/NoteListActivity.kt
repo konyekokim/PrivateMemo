@@ -54,7 +54,7 @@ class NoteListActivity : AppCompatActivity() {
     }
 
     private fun viewActions() {
-        note_recyclerView.layoutManager = gridLayoutManager
+        note_recyclerView.layoutManager = gridLayoutManager as RecyclerView.LayoutManager?
         noteRecyclerAdapter = NoteRecyclerAdapter(notesList, this)
         note_recyclerView.adapter = noteRecyclerAdapter
         noteRecyclerAdapter!!.notifyDataSetChanged()
