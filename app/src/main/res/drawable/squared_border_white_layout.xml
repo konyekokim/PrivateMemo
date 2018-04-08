@@ -13,7 +13,7 @@
         android:topRightRadius="0dp"/>
 
     <stroke
-        android:width="10px"
+        android:width="8px"
         android:color="@color/colorThemeDarker"/>
 
 </shape>

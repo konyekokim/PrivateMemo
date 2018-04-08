@@ -1,5 +1,6 @@
 package com.chokus.konye.privatememo.activity
 
+import android.app.Dialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.chokus.konye.privatememo.datamodel.NoteClass
 import com.chokus.konye.privatememo.datamanager.NoteRealmManager
 import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
 import com.chokus.konye.privatememo.R
+import kotlinx.android.synthetic.main.save_note_dialog.*
 
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,6 +30,7 @@ class NoteActivity : AppCompatActivity() {
     private var noteDrawerLayout: DrawerLayout? = null
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
+    private var saveNoteDialog: Dialog? = null
     private var noteAdapter: NoteRecyclerAdapter? = null
     private var note: NoteClass? = null
     var noteId = -1L
@@ -50,11 +53,8 @@ class NoteActivity : AppCompatActivity() {
         noteTitleEditView!!.setText(noteTitle)
         noteContentEditView!!.setText(noteContent)
         checkImgView!!.setOnClickListener {
-            val dateCreated : String = creationDate()
-            saveMemo(dateCreated)
-            val intent = Intent(applicationContext, NoteListActivity::class.java)
-            startActivity(intent)
-            finish()
+            SaveNoteDialog()
+            saveNoteDialog!!.show()
         }
     }
     fun creationDate(): String {
@@ -84,6 +84,26 @@ class NoteActivity : AppCompatActivity() {
         noteDrawerRelativeLayout = findViewById<View>(R.id.note_relative_drawer_layout) as RelativeLayout
         topMenuIcon = findViewById<View>(R.id.top_menu_icon) as ImageView
         topMenuIcon!!.setOnClickListener { noteDrawerLayout!!.openDrawer(noteDrawerRelativeLayout!!) }
+    }
+
+    private fun SaveNoteDialog(){
+        saveNoteDialog = Dialog(this)
+        saveNoteDialog!!.setContentView(R.layout.save_note_dialog)
+        saveNoteDialog!!.setCancelable(false)
+        saveNoteDialog!!.dialog_save_editText.text = noteTitleEditView!!.text
+        saveNoteDialog!!.dialog_save_button.setOnClickListener {
+            //do whatever function you want here.
+            val dateCreated : String = creationDate()
+            noteTitleEditView!!.text = saveNoteDialog!!.dialog_save_editText.text
+            saveMemo(dateCreated)
+            val intent = Intent(applicationContext, NoteListActivity::class.java)
+            startActivity(intent)
+            saveNoteDialog!!.cancel()
+            finish()
+        }
+        saveNoteDialog!!.dialog_save_cancel_button.setOnClickListener {
+            saveNoteDialog!!.cancel()
+        }
     }
 
     private fun setFullScreen() {

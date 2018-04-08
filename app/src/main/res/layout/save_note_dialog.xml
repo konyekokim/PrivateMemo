@@ -9,10 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:hint="@string/security_text_hint"
+        android:hint="@string/note_title_hint"
         android:textColorHint="@color/colorThemeLighter"
         android:textColor="@color/colorThemeDarker"
-        android:inputType="textPassword"
         android:id="@+id/dialog_save_editText"/>
 
     <View
