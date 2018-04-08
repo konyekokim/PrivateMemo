@@ -3,11 +3,13 @@ package com.chokus.konye.privatememo.activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.widget.DrawerLayout
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import com.chokus.konye.privatememo.datamodel.NoteClass
 import com.chokus.konye.privatememo.datamanager.NoteRealmManager
 import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
@@ -23,6 +25,9 @@ class NoteActivity : AppCompatActivity() {
     private var noteTitle: String? = null
     private var noteContent: String? = null
     private var checkImgView : ImageView? = null
+    private var noteDrawerLayout: DrawerLayout? = null
+    private var noteDrawerRelativeLayout: RelativeLayout? = null
+    private var topMenuIcon: ImageView? = null
     private var noteAdapter: NoteRecyclerAdapter? = null
     private var note: NoteClass? = null
     var noteId = -1L
@@ -35,6 +40,7 @@ class NoteActivity : AppCompatActivity() {
         setFullScreen()
         receivingStringExtras()
         viewActions()
+        sideMenuWidgets()
     }
 
     private fun viewActions() {
@@ -71,6 +77,13 @@ class NoteActivity : AppCompatActivity() {
     private fun receivingStringExtras() {
         noteTitle = intent.getStringExtra(NoteListActivity.NOTE_TITLE)
         noteContent = intent.getStringExtra(NoteListActivity.NOTE_CONTENT)
+    }
+
+    private fun sideMenuWidgets() {
+        noteDrawerLayout = findViewById<View>(R.id.note_drawer_layout) as DrawerLayout
+        noteDrawerRelativeLayout = findViewById<View>(R.id.note_relative_drawer_layout) as RelativeLayout
+        topMenuIcon = findViewById<View>(R.id.top_menu_icon) as ImageView
+        topMenuIcon!!.setOnClickListener { noteDrawerLayout!!.openDrawer(noteDrawerRelativeLayout!!) }
     }
 
     private fun setFullScreen() {
