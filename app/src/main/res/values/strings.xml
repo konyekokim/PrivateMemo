@@ -21,4 +21,7 @@
     <string name="default_note_name">B Loved</string>
     <string name="note_placeholder">I dey vex o.. I dey really vex</string>
     <string name="note_title_hint">untitled</string>
+    <string name="security_text_hint">Password</string>
+    <string name="security_dialog_ok">Ok</string>
+    <string name="security_dialog_cancel">Cancel</string>
 </resources>
