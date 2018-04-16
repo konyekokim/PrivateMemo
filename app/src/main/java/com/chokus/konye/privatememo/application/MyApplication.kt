@@ -1,6 +1,8 @@
 package com.chokus.konye.privatememo.application
 
 import android.app.Application
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.facebook.drawee.backends.pipeline.Fresco
 import io.realm.Realm
 
@@ -12,5 +14,7 @@ class MyApplication : Application(){
         super.onCreate()
         Realm.init(this)
         Fresco.initialize(this)
+        FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(this)
     }
 }

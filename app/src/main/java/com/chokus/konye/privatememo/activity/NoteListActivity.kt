@@ -50,6 +50,7 @@ class NoteListActivity : AppCompatActivity() {
         const val NOTE_TITLE = "com.chokus.konye.privatememo NoteTitle"
         const val NOTE_CONTENT = "com.chokus.konye.privatememo NoteContent"
         const val DATE_CREATED = "com.chokus.konye.privatememo DateCreated"
+
         val MY_REQUEST_CAMERA = 101
         val MY_REQUEST_WRITE_CAMERA = 102
         val CAPTURE_CAMERA = 103
@@ -146,6 +147,9 @@ class NoteListActivity : AppCompatActivity() {
         }catch (e : Exception){
             Log.e("", "Error while creating temp file", e)
         }
+        if(file == null){
+            toastMethod("the problems lies in the getFile function")
+        }
     }
 
     private fun checkPermissionCamera(){
@@ -188,7 +192,7 @@ class NoteListActivity : AppCompatActivity() {
     }
 
     fun getFile() : File?{
-        val fileDir = File(""+ Environment.getExternalStorageDirectory() + "/Android/data/" + applicationContext.packageName + "/Files")
+        val fileDir = File(""+ Environment.getExternalStorageDirectory() + "/Android/data/" + "/PrivateMemoFiles")
         if(!fileDir.exists()){
             if(!fileDir.mkdir()){
                 return null
