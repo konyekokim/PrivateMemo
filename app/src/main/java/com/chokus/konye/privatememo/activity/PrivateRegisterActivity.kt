@@ -4,6 +4,8 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -34,6 +36,7 @@ class PrivateRegisterActivity : AppCompatActivity() {
     }
 
     private fun viewActions() {
+        private_name_editText.text = getEmailIntent()
         sign_in_button.setOnClickListener {
             val intent = Intent(this, PrivateSignInActivity::class.java)
             startActivity(intent)
@@ -42,6 +45,12 @@ class PrivateRegisterActivity : AppCompatActivity() {
             val intent = Intent(this, NoteListActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun getEmailIntent() : Editable {
+        val intent = intent.getStringExtra(GetStartedActivity.USER_EMAIL)
+        val intentEditable = SpannableStringBuilder(intent)
+        return intentEditable
     }
 
     private fun setFullScreen() {
