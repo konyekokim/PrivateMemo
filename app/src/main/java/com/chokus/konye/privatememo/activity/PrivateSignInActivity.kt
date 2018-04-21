@@ -17,23 +17,20 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_private_sign_in.*
 
 class PrivateSignInActivity : AppCompatActivity() {
-    private var mAuth: FirebaseAuth? = null
-    var email: String? = null
-    var password: String? = null
+    private var firebaseAuth: FirebaseAuth? = null
     var progressDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_private_sign_in)
         setFullScreen()
         viewActions()
-        mAuth = FirebaseAuth.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
         progressDialog = ProgressDialog(this)
     }
 
     private fun viewActions() {
         sign_in_button.setOnClickListener {
-            val intent = Intent(this, NoteListActivity::class.java)
-            startActivity(intent)
+            checkWidgetsBeforeSigning()
         }
         sign_up_button.setOnClickListener{
             val intent = Intent(this, PrivateRegisterActivity::class.java)
@@ -41,9 +38,36 @@ class PrivateSignInActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkWidgetsBeforeSigning(){
+        when{
+            email_add_editText.text.toString().isEmpty() -> toastMethod("Please enter email address")
+            password_editText.text.toString().isEmpty() -> toastMethod("input password")
+            else -> signUserIn()
+        }
+    }
+
+    private fun signUserIn(){
+        val email = email_add_editText.text.toString()
+        val password = password_editText.text.toString()
+        firebaseAuth!!.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this){task ->
+                    if(task.isSuccessful){
+                        //Sign in successful.. take action
+                        val user = firebaseAuth!!.currentUser
+                        startActivity(Intent(applicationContext, NoteListActivity::class.java))
+                    }else{
+                        toastMethod("Incorrect email or password")
+                    }
+                }
+    }
+
     private fun setFullScreen() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
+
+    private fun toastMethod(message : String?){
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
 }
