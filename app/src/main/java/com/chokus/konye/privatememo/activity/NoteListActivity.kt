@@ -3,6 +3,7 @@ package com.chokus.konye.privatememo.activity
 import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
@@ -22,12 +23,17 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.webkit.MimeTypeMap
 import android.widget.*
 import com.chokus.konye.privatememo.datamodel.NoteClass
 import com.chokus.konye.privatememo.datamanager.NoteRealmManager
 import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
 import com.chokus.konye.privatememo.R
 import com.chokus.konye.privatememo.Util.Utility
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.content_note_list.*
 import kotlinx.android.synthetic.main.security_dialog.*
 import java.io.File
@@ -43,6 +49,10 @@ class NoteListActivity : AppCompatActivity() {
     private var noteDrawerRelativeLayout: RelativeLayout? = null
     private var topMenuIcon: ImageView? = null
     private  var file: File? = null
+    private var filePath : Uri? = null
+    private var storageReference : StorageReference? = null
+    private var databaseReference : DatabaseReference? = null
+    private var progressDialog : ProgressDialog? = null
     @Inject lateinit var noteRealmManager : NoteRealmManager
     private lateinit var linearLayoutManager : LinearLayoutManager
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -58,6 +68,9 @@ class NoteListActivity : AppCompatActivity() {
         val MY_REQUEST_READ_GALLERY = 104
         val MY_REQUEST_WRITE_GALLERY = 105
         val MY_REQUEST_GALLERY = 106
+
+        val STORAGE_PATH_UPLOADS = "uploads/"
+        val DATABASE_PATH_UPLOADS = "uploads"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +86,9 @@ class NoteListActivity : AppCompatActivity() {
         notesList = noteRealmManager.findAll()
         viewActions()
         sideMenuWidgets()
-        //add a realmchange listener
+        progressDialog = ProgressDialog(this)
+        storageReference = FirebaseStorage.getInstance().reference
+        databaseReference = FirebaseDatabase.getInstance().getReference(DATABASE_PATH_UPLOADS)
     }
 
     private fun viewActions() {
@@ -121,11 +136,14 @@ class NoteListActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         //with when we select the request code we asked for in the StartActivityForResult
         when(requestCode){
-            CAPTURE_CAMERA ->
+            CAPTURE_CAMERA ->{
                 user_display_imageView.setImageURI(Uri.parse("file:///" + file))
-
-            MY_REQUEST_GALLERY ->
+                uploadImage()
+            }
+            MY_REQUEST_GALLERY ->{
                 getImageFromGallery(data)
+                uploadImage()
+            }
         }
     }
 
@@ -146,9 +164,6 @@ class NoteListActivity : AppCompatActivity() {
             user_display_imageView.setImageURI(Uri.parse("file:///" + file))
         }catch (e : Exception){
             Log.e("", "Error while creating temp file", e)
-        }
-        if(file == null){
-            toastMethod("the problems lies in the getFile function")
         }
     }
 
@@ -257,6 +272,41 @@ class NoteListActivity : AppCompatActivity() {
         //change color of button text
         positiveButton.setTextColor(resources.getColor(R.color.colorThemeDarker))
         negativeButton.setTextColor(resources.getColor(R.color.colorThemeDarker))
+    }
+
+    private fun getFileExtension(uri : Uri) : String{
+        val contentResolver = contentResolver
+        val mimeTypeMap = MimeTypeMap.getSingleton()
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri))
+    }
+
+    private fun uploadImage(){
+        if(file != null){
+            filePath = Uri.fromFile(file)
+            progressDialog!!.setTitle("Uploading")
+            progressDialog!!.show()
+
+            val storageRef = storageReference!!.child(STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath!!))
+            storageRef.putFile(filePath!!)
+                    .addOnSuccessListener(this){taskSnapshot ->
+                        //file upload successful
+                        toastMethod("dp upload successful")
+                        //variable to store upload url
+                        val imageUri = taskSnapshot.downloadUrl
+
+                        //adding the upload uri to firebase database
+                        val uploadId = databaseReference!!.push().key
+                        databaseReference!!.child(uploadId).setValue(imageUri)
+                    }
+                    .addOnFailureListener(this){
+                        progressDialog!!.dismiss()
+                        toastMethod("upload failed")
+                    }
+                    .addOnProgressListener(this){taskSnapshot ->
+                        val progress = (100.0 * taskSnapshot.bytesTransferred/taskSnapshot.totalByteCount)
+                        progressDialog!!.setMessage("Uploaded" + progress.toInt() + "%...")
+                    }
+        }
     }
 
     private fun setFullScreen() {
