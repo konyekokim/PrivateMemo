@@ -30,8 +30,7 @@ import com.chokus.konye.privatememo.datamanager.NoteRealmManager
 import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
 import com.chokus.konye.privatememo.R
 import com.chokus.konye.privatememo.Util.Utility
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.content_note_list.*
@@ -89,6 +88,8 @@ class NoteListActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         storageReference = FirebaseStorage.getInstance().reference
         databaseReference = FirebaseDatabase.getInstance().getReference(DATABASE_PATH_UPLOADS)
+        //this gets Image from the storage and makes it the display picture
+        getImageFromStorage()
     }
 
     private fun viewActions() {
@@ -307,6 +308,22 @@ class NoteListActivity : AppCompatActivity() {
                         progressDialog!!.setMessage("Uploaded" + progress.toInt() + "%...")
                     }
         }
+    }
+
+    private fun getImageFromStorage(){
+        databaseReference!!.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot : DataSnapshot){
+                //this method is called for the initial upload and whenever update occurs
+                val value : String? = dataSnapshot.getValue(String::class.java)!!
+                if(value != null){
+                    user_display_imageView.setImageURI(Uri.parse(value))
+                }
+            }
+            override fun onCancelled(error : DatabaseError){
+                //called when there is failure to read the value
+                toastMethod("Failed to load image")
+            }
+        })
     }
 
     private fun setFullScreen() {
