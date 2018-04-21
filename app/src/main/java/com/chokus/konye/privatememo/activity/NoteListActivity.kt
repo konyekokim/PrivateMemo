@@ -274,7 +274,7 @@ class NoteListActivity : AppCompatActivity() {
         negativeButton.setTextColor(resources.getColor(R.color.colorThemeDarker))
     }
 
-    private fun getFileExtension(uri : Uri) : String{
+    private fun getFileExtension(uri : Uri) : String?{
         val contentResolver = contentResolver
         val mimeTypeMap = MimeTypeMap.getSingleton()
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri))

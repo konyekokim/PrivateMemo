@@ -31,7 +31,7 @@ class GetStartedActivity : AppCompatActivity() {
         sign_in_textView.setOnClickListener {
             val intent = Intent(this, PrivateRegisterActivity::class.java)
             if(get_started_email.text.trim().isNotEmpty()){
-                intent.putExtra(USER_EMAIL,get_started_email.text)
+                intent.putExtra(USER_EMAIL,get_started_email.text.toString())
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Enter your email  address", Toast.LENGTH_LONG).show()
@@ -40,7 +40,7 @@ class GetStartedActivity : AppCompatActivity() {
         forward_arrow_img.setOnClickListener {
             val intent = Intent(this, PrivateRegisterActivity::class.java)
             if(get_started_email.text.trim().isNotEmpty()){
-                intent.putExtra(USER_EMAIL,get_started_email.text)
+                intent.putExtra(USER_EMAIL,get_started_email.text.toString())
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Enter your email  address", Toast.LENGTH_LONG).show()
