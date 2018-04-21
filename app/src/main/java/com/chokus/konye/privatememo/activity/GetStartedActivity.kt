@@ -2,15 +2,12 @@ package com.chokus.konye.privatememo.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.widget.Toast
 import com.chokus.konye.privatememo.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-
-import kotlinx.android.synthetic.main.activity_get_started.*
 import kotlinx.android.synthetic.main.content_get_started.*
 
 class GetStartedActivity : AppCompatActivity() {

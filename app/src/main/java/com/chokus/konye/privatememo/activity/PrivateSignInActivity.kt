@@ -4,15 +4,9 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.chokus.konye.privatememo.R
-
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_private_sign_in.*
 

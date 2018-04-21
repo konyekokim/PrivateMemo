@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -16,7 +15,6 @@ import com.chokus.konye.privatememo.datamanager.NoteRealmManager
 import com.chokus.konye.privatememo.adapter.NoteRecyclerAdapter
 import com.chokus.konye.privatememo.R
 import kotlinx.android.synthetic.main.save_note_dialog.*
-
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject

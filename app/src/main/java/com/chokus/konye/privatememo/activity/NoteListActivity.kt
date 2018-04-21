@@ -2,7 +2,6 @@ package com.chokus.konye.privatememo.activity
 
 import android.Manifest
 import android.app.AlertDialog
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
@@ -34,12 +33,9 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.content_note_list.*
-import kotlinx.android.synthetic.main.security_dialog.*
 import java.io.File
 import java.io.FileOutputStream
-
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 class NoteListActivity : AppCompatActivity() {
     private var noteRecyclerAdapter : NoteRecyclerAdapter? = null
