@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/theme_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.chokus.konye.privatememo.activity.PrivateRegisterActivity"
+    tools:showIn="@layout/activity_private_register">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:id="@+id/sign_up_relative_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:background="@drawable/register_bg"
+            android:id="@+id/sign_up_layout"
+            android:alpha="0.8">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:inputType="textPersonName"
+                android:hint="@string/user_username"
+                android:textColor="@color/secondaryColor"
+                android:id="@+id/private_name_editText"
+                android:background="@android:color/transparent"
+                android:textColorHint="@color/colorThemeLighter"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/secondaryColor"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:id="@+id/email_add_editText"
+                android:hint="@string/user_email"
+                android:textColor="@color/secondaryColor"
+                android:background="@android:color/transparent"
+                android:textColorHint="@color/colorThemeLighter"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/secondaryColor"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:id="@+id/password_editText"
+                android:hint="@string/user_password"
+                android:textColor="@color/secondaryColor"
+                android:background="@android:color/transparent"
+                android:textColorHint="@color/colorThemeLighter"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/secondaryColor"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:id="@+id/confirm_password_editText"
+                android:hint="@string/user_confirm_password"
+                android:textColor="@color/secondaryColor"
+                android:background="@android:color/transparent"
+                android:textColorHint="@color/colorThemeLighter"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/secondaryColor"
+                android:layout_marginBottom="40dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-25dp"
+            android:layout_marginEnd="50dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/sign_up_text"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:background="@drawable/bottom_right_button"
+            android:id="@+id/sign_up_button"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/secondaryColor"
+            android:layout_below="@+id/sign_up_layout"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_text"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorThemeDarker"
+        android:background="@drawable/bottom_button"
+        android:id="@+id/sign_in_button"/>
+
+</RelativeLayout>
