@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/theme_gradient"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.chokus.konye.privatememo.activity.SplashScreenActivity"
+    tools:showIn="@layout/activity_splash_screen">
+
+    <ImageView
+        android:layout_height="250dp"
+        android:layout_width="240dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/private_memo_icon"
+        android:src="@mipmap/private_memo_icon"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/private_memo_icon"
+        android:text="@string/app_name"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/secondaryColor"
+        android:textSize="40sp"
+        android:layout_marginTop="5dp"/>
+
+</RelativeLayout>
