@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.chokus.konye.privatememo.R
@@ -23,6 +24,7 @@ class PrivateSignInActivity : AppCompatActivity() {
     }
 
     private fun viewActions() {
+        error_layout.visibility = View.INVISIBLE
         sign_in_button.setOnClickListener {
             checkWidgetsBeforeSigning()
         }
@@ -49,8 +51,9 @@ class PrivateSignInActivity : AppCompatActivity() {
                         //Sign in successful.. take action
                         val user = firebaseAuth!!.currentUser
                         startActivity(Intent(applicationContext, NoteListActivity::class.java))
+                        error_layout.visibility = View.INVISIBLE
                     }else{
-                        toastMethod("Incorrect email or password")
+                        error_layout.visibility = View.VISIBLE
                     }
                 }
     }
