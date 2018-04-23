@@ -10,8 +10,8 @@
     tools:showIn="@layout/activity_get_started">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="240dp"
+        android:layout_width="600dp"
+        android:layout_height="440dp"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:src="@mipmap/memo_welcome"
@@ -23,8 +23,8 @@
         android:orientation="horizontal"
         android:layout_below="@+id/welcome_img"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:padding="10dp"
         android:background="@drawable/curved_border_white_layout">
 
@@ -40,6 +40,7 @@
             android:background="@android:color/transparent"
             android:textColorHint="@color/colorThemeLighter"
             android:textColor="@color/colorThemeDarker"
+            android:textSize="30sp"
             android:id="@+id/get_started_email"
             android:layout_toStartOf="@+id/sign_in_textView"/>
 
@@ -48,15 +49,15 @@
             android:layout_height="wrap_content"
             android:text="@string/sign_in_text"
             android:textColor="@color/colorThemeDarker"
-            android:textSize="17sp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="5dp"
+            android:textSize="30sp"
             android:layout_toStartOf="@+id/forward_arrow_img"
             android:id="@+id/sign_in_textView"/>
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:id="@+id/forward_arrow_img"
